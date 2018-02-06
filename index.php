@@ -54,8 +54,8 @@ $fruits =[
 ];
 
 //dalshe random qilib ekranga chiqaramiz
-$current_fruit = array_rand($fruits); //bitta fruitni random qilib oldik
-var_dum($current_fruit);
+$current_fruit_key = array_rand($fruits); //bitta fruitni random qilib oldik
+$current_fruit = $fruits[$current_fruit_key];
 $image = $current_fruit[0];
 $_SESSION['answer']=$current_fruit[1];
 
