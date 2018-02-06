@@ -1,21 +1,21 @@
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>js project</title>
-    <script type="text/javascript" src="assets/jquery+popper/node_modules/popper.js/dist/umd/popper.js"></script>
-    <script type="text/javascript" src="assets/jquery+popper/node_modules/jquery/dist/jquery.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
-    <script type="text/javascript" src="assets/js/style.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-</head>
-
-<body>
 <?php
-session_start();
+session_start();/// Sessiya  ochildi
+error_reporting(E_ALL);
+function checkanswer($javob) {
+    return $_SESSION['answer'] == $javob;
+}
+if (isset($_GET['answer'])){ // javob kelganmi yuqmi qaraymiz va kelgan bolsa javob uni tekshiramiz
+    $answer=$_GET['answer'];
+    if(checkanswer($answer)) {
+        echo 'togri';
+    } else {
+        echo 'notogri';
+    }
+
+}
+
+
+
 $fruits =[
     [
         "assets/img/541b8c1202150432ea27577fef4a3365.jpg",
@@ -52,21 +52,31 @@ $fruits =[
     ],
 
 ];
-$ran_fruits = array_rand($fruits, 2);
-$my_ran = $fruits[$ran_fruits[0]];
-$_SESSION['ran_session']=$my_ran[1];
-$ran_session;
-if (isset($_GET['answer'])){
-    $answer=$_GET['answer'];
-}
-if ($answer==$ran_session){
-    echo 'togri';
-}
 
-//if ($answer==$my_ran[1]){
-//    echo 'togri';
-//}
+//dalshe random qilib ekranga chiqaramiz
+$current_fruit = array_rand($fruits); //bitta fruitni random qilib oldik
+var_dum($current_fruit);
+$image = $current_fruit[0];
+$_SESSION['answer']=$current_fruit[1];
+
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>js project</title>
+    <script type="text/javascript" src="assets/jquery+popper/node_modules/popper.js/dist/umd/popper.js"></script>
+    <script type="text/javascript" src="assets/jquery+popper/node_modules/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/style.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body>
+
+
 <div class="row">
 
 
@@ -81,7 +91,7 @@ if ($answer==$ran_session){
                 </div>
                 <div class="modal-body">
                     <!--<p>Modal body text goes here.</p>-->
-                    <div class="col-12"><img id="fruits" class="img-thumbnail" src="<?php echo $my_ran[0]; ?>"></div>
+                    <div class="col-12"><img id="fruits" class="img-thumbnail" src="<?php echo $image; ?>"></div>
                 </div>
                 <div class="modal-footer">
                     <!--<button type="button" class="btn btn-primary"></button>-->
