@@ -4,26 +4,25 @@ error_reporting(E_ALL);
 function checkanswer($javob) {
     return $_SESSION['answer'] == $javob;
 }
+$current_answer = false;
+$user_point = 0;
 if (isset($_GET['answer'])){ // javob kelganmi yuqmi qaraymiz va kelgan bolsa javob uni tekshiramiz
     $answer=$_GET['answer'];
     if(checkanswer($answer)) {
-        echo 'togri';
-    } else {
-        echo 'notogri';
-    }
-    if (isset($_SESSION['point'])) {
-        echo $_SESSION['point'];
-    } else {
-        echo 0;
-    }
-
-    if (checkanswer($answer)&& isset($_SESSION['point'])) {
-        $_SESSION['point'] =   $_SESSION['point'] + 1;
-    } else {
-        $_SESSION['point'] = $_SESSION['point'] -1;
-        if ($_SESSION['point']<1){
+        $current_answer = true;
+        if (isset($_SESSION['point'])){
+            $_SESSION['point']=$_SESSION['point'] +1;
+        } else{
             $_SESSION['point']=0;
         }
+        $user_point = $_SESSION['point'];
+    } else {
+        $current_answer = false;
+        $_SESSION['point'] = $_SESSION['point'] -1;
+        if ($_SESSION['point'] < 1){
+            $_SESSION['point'] = 0;
+        }
+        $user_point = $_SESSION['point'];
     }
 }
 
@@ -93,15 +92,24 @@ $_SESSION['answer']=$current_fruit[1];
 
 <div class="row">
 
-<?php echo $_SESSION['point']; ?>
-    <div class="modal" tabindex="-1" role="dialog">
+
+    <div class="modal mt-5" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <div class="pl-5 alert alert-success col-12 col-sm-12 col-md-12 col-xl2">Your scores:<?=$user_point; ?>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="mt-5" aria-hidden="true">&times;</span>
+                        </button>
+                        <?php
+                        if ($current_answer){
+                            echo '<div class="text-info result">Correct</div>';
+                        }else{
+                            echo '<div class="text-danger result">Incorrect</div>';
+                        }
+                        ?>
+
+                    </div>
                 </div>
                 <div class="modal-body">
                     <!--<p>Modal body text goes here.</p>-->
@@ -113,7 +121,7 @@ $_SESSION['answer']=$current_fruit[1];
                         <div class="form-row align-items-center">
                             <div class="col-8">
                                 <label class="sr-only" ></label>
-                                <input type="text" class="form-control mb-2" id="value" placeholder=""  name="answer">
+                                <input  type="text" class="form-control mb-2" id="" placeholder="" autocomplete="off"  name="answer">
                             </div>
                             <div class="col-2 mr-2">
                                 <button type="button" class="btn btn-primary mb-2" id="btn-one">Next</button>
