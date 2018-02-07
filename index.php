@@ -11,8 +11,22 @@ if (isset($_GET['answer'])){ // javob kelganmi yuqmi qaraymiz va kelgan bolsa ja
     } else {
         echo 'notogri';
     }
+    if (isset($_SESSION['point'])) {
+        echo $_SESSION['point'];
+    } else {
+        echo 0;
+    }
 
+    if (checkanswer($answer)&& isset($_SESSION['point'])) {
+        $_SESSION['point'] =   $_SESSION['point'] + 1;
+    } else {
+        $_SESSION['point'] = $_SESSION['point'] -1;
+        if ($_SESSION['point']<1){
+            $_SESSION['point']=0;
+        }
+    }
 }
+
 
 
 
@@ -58,7 +72,7 @@ $current_fruit_key = array_rand($fruits); //bitta fruitni random qilib oldik
 $current_fruit = $fruits[$current_fruit_key];
 $image = $current_fruit[0];
 $_SESSION['answer']=$current_fruit[1];
-
+//session_destroy();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +93,7 @@ $_SESSION['answer']=$current_fruit[1];
 
 <div class="row">
 
-
+<?php echo $_SESSION['point']; ?>
     <div class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

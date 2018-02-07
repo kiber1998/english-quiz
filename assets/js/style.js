@@ -8,9 +8,9 @@ $(document).ready(function() {
       //     url:"http://english-quiz/index.php",
       //     method: "GET",
       //     dateType:"json",
-      //     // data:{}
+      //     data:{}
       // });
-
+      //
       // request.done(function (url) {
       //     var fruit_t = JSON.parse(url);
       //
