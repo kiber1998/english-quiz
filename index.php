@@ -98,16 +98,17 @@ $_SESSION['answer']=$current_fruit[1];
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="pl-5 alert alert-success col-12 col-sm-12 col-md-12 col-xl2">Your scores:<?=$user_point; ?>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span class="mt-5" aria-hidden="true">&times;</span>
-                        </button>
-                        <?php
+<!--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                            <span class="mt-5" aria-hidden="true">&times;</span>-->
+<!--                        </button>-->
+                       <div class="result"> <?php
                         if ($current_answer){
-                            echo '<div class="text-info result">Correct</div>';
+                            echo '<div class="text-info">Correct</div>';
                         }else{
-                            echo '<div class="text-danger result">Incorrect</div>';
+                            echo '<div class="text-danger">Incorrect</div>';
                         }
                         ?>
+                       </div>
 
                     </div>
                 </div>
@@ -125,7 +126,7 @@ $_SESSION['answer']=$current_fruit[1];
                             </div>
                             <div class="col-2 mr-2">
                                 <button type="button" class="btn btn-primary mb-2" id="btn-one">Next</button>
-                                <button type="button" class="btn btn-primary mb-2" id="next-btn">Next1</button>
+<!--                                <button type="button" class="btn btn-primary mb-2" id="next-btn">Next1</button>-->
                             </div>
                         </div>
                     </form>
@@ -137,7 +138,7 @@ $_SESSION['answer']=$current_fruit[1];
 <!-- modal -->
 <div class="container">
     <div class="row">
-        <button type="button" class="btn btn2 btn-outline-success col-12 mt-5" id="btn"><h1>Start</h1></button>
+<!--        <button type="button" class="btn btn2 btn-outline-success col-12 mt-5" id="btn"><h1>Start</h1></button>-->
     </div>
 </div>
 </body>

@@ -1,9 +1,9 @@
 $(document).ready(function() {
+    $('.modal').show(800, 5000);
     $('#next-btn').hide();
-  $('#btn').click(function(){
-
-      $('.btn2').hide(400);
-      $('.modal').show(800);
+    $('.result').hide();
+    $('#btn').hide();
+    // $('#btn').click(function(){
       // var request = $.ajax({
       //     url:"http://english-quiz/index.php",
       //     method: "GET",
@@ -51,7 +51,7 @@ $(document).ready(function() {
       //         src: random_f
       //     })
 
-      })
+      // })
 // })
 
 
