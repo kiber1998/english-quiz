@@ -1,13 +1,21 @@
 <?php
 session_start();/// Sessiya  ochildi
 error_reporting(E_ALL);
+//$oldtime = $_SESSION['start'] = time();
+//$_SESSION['end'] = time() + 60;
+//if ($_SESSION['end'] < time()){
+
+//}
 function checkanswer($javob) {
     return $_SESSION['answer'] == $javob;
 }
+function hasAnswer(){
+    return isset($_POST['answer']);
+}
 $current_answer = false;
 $user_point = 0;
-if (isset($_GET['answer'])){ // javob kelganmi yuqmi qaraymiz va kelgan bolsa javob uni tekshiramiz
-    $answer=$_GET['answer'];
+if (hasAnswer()){ // javob kelganmi yuqmi qaraymiz va kelgan bolsa javob uni tekshiramiz
+    $answer=$_POST['answer'];
     if(checkanswer($answer)) {
         $current_answer = true;
         if (isset($_SESSION['point'])){
@@ -72,6 +80,9 @@ $current_fruit = $fruits[$current_fruit_key];
 $image = $current_fruit[0];
 $_SESSION['answer']=$current_fruit[1];
 //session_destroy();
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,6 +95,8 @@ $_SESSION['answer']=$current_fruit[1];
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="assets/js/style.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.timer.js"></script>
+    <script type="text/javascript" src="assets/js/demo.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
@@ -98,18 +111,20 @@ $_SESSION['answer']=$current_fruit[1];
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="pl-5 alert alert-success col-12 col-sm-12 col-md-12 col-xl2">Your scores:<?=$user_point; ?>
-<!--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                            <span class="mt-5" aria-hidden="true">&times;</span>-->
-<!--                        </button>-->
-                       <div class="result"> <?php
-                        if ($current_answer){
-                            echo '<div class="text-info">Correct</div>';
-                        }else{
-                            echo '<div class="text-danger">Incorrect</div>';
-                        }
-                        ?>
-                       </div>
+                        <div class="result">
+                            <?php
+                            if (hasAnswer()){
 
+                                if ($current_answer){
+                                    echo '<div class="text-info">Correct</div>';
+                                }else{
+                                    echo '<div class="text-danger">Incorrect</div>';
+                                }
+                            }
+
+                            ?>
+                            <h2 class="text-right"><span id='countdown' style=''></span></h2>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -118,15 +133,15 @@ $_SESSION['answer']=$current_fruit[1];
                 </div>
                 <div class="modal-footer">
                     <!--<button type="button" class="btn btn-primary"></button>-->
-                    <form action="index.php" method="GET">
+                    <form action="index.php" method="POST">
                         <div class="form-row align-items-center">
                             <div class="col-8">
                                 <label class="sr-only" ></label>
-                                <input  type="text" class="form-control mb-2" id="" placeholder="" autocomplete="off"  name="answer">
+                                <input   class="form-control mb-2" id="" placeholder="" autocomplete="off"  name="answer">
                             </div>
                             <div class="col-2 mr-2">
                                 <button type="button" class="btn btn-primary mb-2" id="btn-one">Next</button>
-<!--                                <button type="button" class="btn btn-primary mb-2" id="next-btn">Next1</button>-->
+                                <!--                                <button type="button" class="btn btn-primary mb-2" id="next-btn">Next1</button>-->
                             </div>
                         </div>
                     </form>
@@ -138,7 +153,7 @@ $_SESSION['answer']=$current_fruit[1];
 <!-- modal -->
 <div class="container">
     <div class="row">
-<!--        <button type="button" class="btn btn2 btn-outline-success col-12 mt-5" id="btn"><h1>Start</h1></button>-->
+        <!--        <button type="button" class="btn btn2 btn-outline-success col-12 mt-5" id="btn"><h1>Start</h1></button>-->
     </div>
 </div>
 </body>

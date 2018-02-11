@@ -1,8 +1,10 @@
 $(document).ready(function() {
-    $('.modal').show(800, 5000);
+    $('.modal').show(800);
     $('#next-btn').hide();
-    $('.result').hide();
+    // $('.result').hide();
     $('#btn').hide();
+
+
     // $('#btn').click(function(){
       // var request = $.ajax({
       //     url:"http://english-quiz/index.php",
