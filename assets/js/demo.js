@@ -31,6 +31,7 @@ var Example1 = new (function() {
         currentTime = 0;
         this.Timer.stop().once();
     };
+    
     $(init);
 });
 
@@ -56,19 +57,19 @@ var Example2 = new (function() {
             }
             currentTime -= incrementTime / 10;
             if (currentTime < 0){
-                currentTime = 0
-                if (currentTime==0){
-
-                    result_t = 0;
-                }
-                var request = $.ajax({
-                    url:"http://english-quiz/result.php",
-                    method: "GET",
-                    dateType:"json",
-                    data: {
-                        result:result_t
-                    }
-                });
+                // currentTime = 0
+                // if (currentTime==0){
+                //
+                //     result_t = 0;
+                // }
+                // var request = $.ajax({
+                //     url:"http://english-quiz/result.php",
+                //     method: "GET",
+                //     dateType:"json",
+                //     data: {
+                //         result:result_t
+                //     }
+                // });
                 // request.done(function (url) {
                 //     var myresult = JSON.parse(url);
                 // })
@@ -150,6 +151,7 @@ var count = 0,
     timer = $.timer(function() {
         count++;
         $('#counter').html(count);
+
     });
 timer.set({ time : 1000, autostart : true });
 

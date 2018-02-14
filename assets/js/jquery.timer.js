@@ -273,5 +273,5 @@
         return this;
 
     };
-    
+
 })(jQuery);

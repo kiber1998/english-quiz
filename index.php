@@ -36,7 +36,6 @@ if (hasAnswer()){ // javob kelganmi yuqmi qaraymiz va kelgan bolsa javob uni tek
 
 
 
-
 $fruits =[
     [
         "assets/img/541b8c1202150432ea27577fef4a3365.jpg",
@@ -79,11 +78,30 @@ $current_fruit_key = array_rand($fruits); //bitta fruitni random qilib oldik
 $current_fruit = $fruits[$current_fruit_key];
 $image = $current_fruit[0];
 $_SESSION['answer']=$current_fruit[1];
+
+if (isset($_SESSION['oldtime'])){ //tekshirvoti agar wunaqa sessya bosa end time ocw keregini etvoti
+    $endtime=$_SESSION['oldtime'] +1*60; //old time + 5minut
+    if ($endtime - time() > 0){ //yengi voxtdan eskisni ayrganda 0dan kota bolw funksiyasi
+        echo 'xali bor';
+    }else{
+        echo 'voxtingiz tamom';
+    }
+} else {
+    // oyin boshlandi, boshlanish vaqti urnatildi
+    $_SESSION['oldtime'] = time(); //sessyaga ovoti
+}
+
+//echo $_SESSION['oldtime']."sessyadi old time".'<br/>';
+//echo time()."time()".'<br/>';
+//echo $endtime."endtime peremeni".'<br/>';
+//$oldtime=$_SESSION['oldtime']=time();
+//$endtime=$oldtime+2*60;
+//$ntime=$endtime - $oldtime;
+//$sek = $ntime/120;
+
 //session_destroy();
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,16 +113,34 @@ $_SESSION['answer']=$current_fruit[1];
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="assets/js/style.js"></script>
-    <script type="text/javascript" src="assets/js/jquery.timer.js"></script>
-    <script type="text/javascript" src="assets/js/demo.js"></script>
+    <script type="text/javascript" src="assets/js/timer.js"></script>
+    <!--    <script type="text/javascript" src="assets/js/jquery.timer.js"></script>-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
-
+<!--<script>-->
+<!--    var oldtime= --><?php //echo $oldtime?>
+<!--//    var remain_time = --><?php ////echo $endtime; ?>
+<!--//    var ntime = --><?php ////echo $ntime?>
+<!--//    var sek = --><?php ////echo $sek?>
+<!--</script>-->
 
 <div class="row">
-
+<!--    <script>-->
+<!---->
+<!--        //     const step = 100;-->
+<!--        // var timerId = setInterval(function() {-->
+<!--        //     var remaining_time = remaining_time - step-->
+<!--        //     $('#timer').html((remaining_time / 1000) + ' sek');-->
+<!--        //     if (remaining_time < 0) {-->
+<!--        //         clearInterval(timerId)-->
+<!--        //         $('.result').show();-->
+<!--        //         alert('GAME OVER')-->
+<!--        //     }-->
+<!--        // }, step);-->
+<!---->
+<!--    </script>-->
 
     <div class="modal mt-5" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -123,7 +159,7 @@ $_SESSION['answer']=$current_fruit[1];
                             }
 
                             ?>
-                            <h2 class="text-right"><span id='countdown' style=''></span></h2>
+                            <h2 class="text-right remaining"><span id="my_timer"></span></h2>
                         </div>
                     </div>
                 </div>
