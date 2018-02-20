@@ -78,19 +78,28 @@ $current_fruit_key = array_rand($fruits); //bitta fruitni random qilib oldik
 $current_fruit = $fruits[$current_fruit_key];
 $image = $current_fruit[0];
 $_SESSION['answer']=$current_fruit[1];
+//time php
+//
+//if (isset($_SESSION['oldtime'])){ //tekshirvoti agar wunaqa sessya bosa end time ocw keregini etvoti
+//    $endtime=$_SESSION['oldtime'] +1*60; //old time + 5minut
+//    if ($endtime - time() > 0){ //yengi voxtdan eskisni ayrganda 0dan kota bolw funksiyasi
+//        echo 'xali bor';
+//    }else{
+//        echo 'voxtingiz tamom';
+//    }
+//} else {
+//    // oyin boshlandi, boshlanish vaqti urnatildi
+//    $_SESSION['oldtime'] = time(); //sessyaga ovoti
+//}
+//time php
+//if (isset($_GET['result'])) $timer=$_GET['result'];
+//if ($timer==true){
+//    echo 'Game Over';
+//}else{
+//    echo 'xali bor';
+//}
 
-if (isset($_SESSION['oldtime'])){ //tekshirvoti agar wunaqa sessya bosa end time ocw keregini etvoti
-    $endtime=$_SESSION['oldtime'] +1*60; //old time + 5minut
-    if ($endtime - time() > 0){ //yengi voxtdan eskisni ayrganda 0dan kota bolw funksiyasi
-        echo 'xali bor';
-    }else{
-        echo 'voxtingiz tamom';
-    }
-} else {
-    // oyin boshlandi, boshlanish vaqti urnatildi
-    $_SESSION['oldtime'] = time(); //sessyaga ovoti
-}
-
+//}
 //echo $_SESSION['oldtime']."sessyadi old time".'<br/>';
 //echo time()."time()".'<br/>';
 //echo $endtime."endtime peremeni".'<br/>';
@@ -119,14 +128,16 @@ if (isset($_SESSION['oldtime'])){ //tekshirvoti agar wunaqa sessya bosa end time
 </head>
 
 <body>
-<!--<script>-->
-<!--    var oldtime= --><?php //echo $oldtime?>
-<!--//    var remain_time = --><?php ////echo $endtime; ?>
-<!--//    var ntime = --><?php ////echo $ntime?>
-<!--//    var sek = --><?php ////echo $sek?>
-<!--</script>-->
+<script>
+    var result_t = <?php echo $_SESSION['result_t']=true;?>
+    //<!--    var oldtime= --><?php ////echo $oldtime?>
+//<!--//    var remain_time = --><?php //////echo $endtime; ?>
+//<!--//    var ntime = --><?php //////echo $ntime?>
+//<!--//    var sek = --><?php //////echo $sek?>
+</script>
 
 <div class="row">
+<!--    <div class="alert alert-danger"><h2>I LOVE YOU LAYLO !!!!</h2></div>-->
 <!--    <script>-->
 <!---->
 <!--        //     const step = 100;-->
@@ -142,7 +153,7 @@ if (isset($_SESSION['oldtime'])){ //tekshirvoti agar wunaqa sessya bosa end time
 <!---->
 <!--    </script>-->
 
-    <div class="modal mt-5" tabindex="-1" role="dialog">
+    <div class="modal mt-5 " tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -159,7 +170,8 @@ if (isset($_SESSION['oldtime'])){ //tekshirvoti agar wunaqa sessya bosa end time
                             }
 
                             ?>
-                            <h2 class="text-right remaining"><span id="my_timer"></span></h2>
+                            <h2 class="text-right "><span id="my_timer" class=""></span></h2>
+                            <h2 class="time-error">voxtingiz tugadi</h2>
                         </div>
                     </div>
                 </div>
@@ -170,16 +182,18 @@ if (isset($_SESSION['oldtime'])){ //tekshirvoti agar wunaqa sessya bosa end time
                 <div class="modal-footer">
                     <!--<button type="button" class="btn btn-primary"></button>-->
                     <form action="index.php" method="POST">
-                        <div class="form-row align-items-center">
-                            <div class="col-8">
-                                <label class="sr-only" ></label>
-                                <input   class="form-control mb-2" id="" placeholder="" autocomplete="off"  name="answer">
+                        <fieldset id="disable" >
+                            <div class="form-row align-items-center">
+                                <div class="col-8">
+                                    <label class="sr-only" ></label>
+                                    <input   class="form-control mb-2 for-disable" id="my-input" placeholder="" autocomplete="off"  name="answer" >
+                                </div>
+                                <div class="col-2 mr-2 " id="btn-one">
+                                    <button type="button" class="btn btn-primary mb-2" >Next</button>
+                                    <!--                                <button type="button" class="btn btn-primary mb-2" id="next-btn">Next1</button>-->
+                                </div>
                             </div>
-                            <div class="col-2 mr-2">
-                                <button type="button" class="btn btn-primary mb-2" id="btn-one">Next</button>
-                                <!--                                <button type="button" class="btn btn-primary mb-2" id="next-btn">Next1</button>-->
-                            </div>
-                        </div>
+                        </fieldset>
                     </form>
                 </div>
             </div>
@@ -192,6 +206,7 @@ if (isset($_SESSION['oldtime'])){ //tekshirvoti agar wunaqa sessya bosa end time
         <!--        <button type="button" class="btn btn2 btn-outline-success col-12 mt-5" id="btn"><h1>Start</h1></button>-->
     </div>
 </div>
+
 </body>
 
 </html>
