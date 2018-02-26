@@ -19,6 +19,7 @@
     <script type="text/javascript" src="assets/jquery+popper/node_modules/jquery/dist/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+
     <script type="text/javascript" src="assets/js/admin.js"></script>
     <link rel="stylesheet" href="assets/icons/font-awesome/css/font-awesome.css">
 </head>
@@ -37,7 +38,7 @@
                 <a class="nav-link text-white ml-sm-4" href=""><h5>Levels</h5></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white ml-sm-4" href=""><h5>Bonuses</h5></a>
+                <a class="nav-link text-white ml-sm-4" href="users.php"><h5>Users</h5></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white ml-sm-4" href="news.php"><h5>News</h5></a>

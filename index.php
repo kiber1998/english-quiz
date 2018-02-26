@@ -1,83 +1,96 @@
 <?php
-session_start();/// Sessiya  ochildi
-error_reporting(E_ALL);
-//$oldtime = $_SESSION['start'] = time();
-//$_SESSION['end'] = time() + 60;
-//if ($_SESSION['end'] < time()){
-
+//session_start();/// Sessiya  ochildi
+//error_reporting(E_ALL);
+////$oldtime = $_SESSION['start'] = time();
+////$_SESSION['end'] = time() + 60;
+////if ($_SESSION['end'] < time()){
+//
+////}
+//
+//function checkanswer($javob) {
+//    return $_SESSION['answer'] == $javob;
 //}
-function checkanswer($javob) {
-    return $_SESSION['answer'] == $javob;
-}
-function hasAnswer(){
-    return isset($_POST['answer']);
-}
-$current_answer = false;
-$user_point = 0;
-if (hasAnswer()){ // javob kelganmi yuqmi qaraymiz va kelgan bolsa javob uni tekshiramiz
-    $answer=$_POST['answer'];
-    if(checkanswer($answer)) {
-        $current_answer = true;
-        if (isset($_SESSION['point'])){
-            $_SESSION['point']=$_SESSION['point'] +1;
-        } else{
-            $_SESSION['point']=0;
-        }
-        $user_point = $_SESSION['point'];
-    } else {
-        $current_answer = false;
-        $_SESSION['point'] = $_SESSION['point'] -1;
-        if ($_SESSION['point'] < 1){
-            $_SESSION['point'] = 0;
-        }
-        $user_point = $_SESSION['point'];
-    }
-}
+//function hasAnswer(){
+//    return isset($_POST['answer']);
+//}
+//$current_answer = false;
+//$user_point = 0;
+//if (hasAnswer()){ // javob kelganmi yuqmi qaraymiz va kelgan bolsa javob uni tekshiramiz
+//    $answer=$_POST['answer'];
+//    if(checkanswer($answer)) {
+//        $current_answer = true;
+//        if (isset($_SESSION['point'])){
+//            $_SESSION['point']=$_SESSION['point'] +1;
+//        } else{
+//            $_SESSION['point']=0;
+//        }
+//        $user_point = $_SESSION['point'];
+//    } else {
+//        $current_answer = false;
+//        $_SESSION['point'] = $_SESSION['point'] -1;
+//        if ($_SESSION['point'] < 1){
+//            $_SESSION['point'] = 0;
+//        }
+//        $user_point = $_SESSION['point'];
+//    }
+//}
+//
+//
+//
+//$fruits =[
+//    [
+//        "assets/img/541b8c1202150432ea27577fef4a3365.jpg",
+//        "lemon",
+//
+//    ],
+//    [
+//        "assets/img/Без%20названия.jpg",
+//        "apple",
+//    ],
+//    [
+//        "assets/img/brace-1298738_640.png",
+//        "cherry",
+//    ],
+//    [
+//        "assets/img/juicy_peach_and_green_leaf_vector_570559.jpg",
+//        "peach"
+//    ],
+//    [
+//        "assets/img/857739476.jpg",
+//        "quince",
+//    ],
+//    [
+//        "assets/img/617734754.jpg",
+//        "grape",
+//    ],
+//    [
+//        "assets/img/watercolor-drawing-raspberries-hand-drawn-vector-illustration-48242474.jpg",
+//        "raspberries",
+//    ],
+//    [
+//        "assets/img/coloured-strawberries-design_1308-848.jpg",
+//        "strawberries"
+//    ],
+//
+//];
+//if (isset($_POST['answer'])){
+    include "database.php";
+    $questions = questionst_index();
 
+    $current_question_key = array_rand($questions);
+    $curent_question = $questions[$current_question_key];
 
+    $image=$curent_question['savollar'];
 
-$fruits =[
-    [
-        "assets/img/541b8c1202150432ea27577fef4a3365.jpg",
-        "lemon",
+echo '<pre>';
+//    var_dump($curent_question);
 
-    ],
-    [
-        "assets/img/Без%20названия.jpg",
-        "apple",
-    ],
-    [
-        "assets/img/brace-1298738_640.png",
-        "cherry",
-    ],
-    [
-        "assets/img/juicy_peach_and_green_leaf_vector_570559.jpg",
-        "peach"
-    ],
-    [
-        "assets/img/857739476.jpg",
-        "quince",
-    ],
-    [
-        "assets/img/617734754.jpg",
-        "grape",
-    ],
-    [
-        "assets/img/watercolor-drawing-raspberries-hand-drawn-vector-illustration-48242474.jpg",
-        "raspberries",
-    ],
-    [
-        "assets/img/coloured-strawberries-design_1308-848.jpg",
-        "strawberries"
-    ],
-
-];
 
 //dalshe random qilib ekranga chiqaramiz
-$current_fruit_key = array_rand($fruits); //bitta fruitni random qilib oldik
-$current_fruit = $fruits[$current_fruit_key];
-$image = $current_fruit[0];
-$_SESSION['answer']=$current_fruit[1];
+//$current_fruit_key = array_rand($fruits); //bitta fruitni random qilib oldik
+//$current_fruit = $fruits[$current_fruit_key];
+//$image = $current_fruit[0];
+//$_SESSION['answer']=$current_fruit[1];
 //time php
 //
 //if (isset($_SESSION['oldtime'])){ //tekshirvoti agar wunaqa sessya bosa end time ocw keregini etvoti
@@ -153,23 +166,23 @@ $_SESSION['answer']=$current_fruit[1];
 <!---->
 <!--    </script>-->
 
-    <div class="modal mt-5 " tabindex="-1" role="dialog">
+    <div class="modal mt-1 d-none " tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="pl-5 alert alert-success col-12 col-sm-12 col-md-12 col-xl2">Your scores:<?=$user_point; ?>
+                    <div class="pl-5 alert alert-success  col-12 col-sm-12 col-md-12 col-xl2">Your scores:
                         <div class="result">
-                            <?php
-                            if (hasAnswer()){
-
-                                if ($current_answer){
-                                    echo '<div class="text-info">Correct</div>';
-                                }else{
-                                    echo '<div class="text-danger">Incorrect</div>';
-                                }
-                            }
-
-                            ?>
+<!--                            --><?php
+//                            if (hasAnswer()){
+//
+//                                if ($current_answer){
+//                                    echo '<div class="text-info">Correct</div>';
+//                                }else{
+//                                    echo '<div class="text-danger">Incorrect</div>';
+//                                }
+//                            }
+//
+//                            ?>
                             <h2 class="text-right "><span id="my_timer" class=""></span></h2>
                             <h2 class="time-error">voxtingiz tugadi</h2>
                         </div>
@@ -182,18 +195,17 @@ $_SESSION['answer']=$current_fruit[1];
                 <div class="modal-footer">
                     <!--<button type="button" class="btn btn-primary"></button>-->
                     <form action="index.php" method="POST">
-                        <fieldset id="disable" >
-                            <div class="form-row align-items-center">
-                                <div class="col-8">
-                                    <label class="sr-only" ></label>
-                                    <input   class="form-control mb-2 for-disable" id="my-input" placeholder="" autocomplete="off"  name="answer" >
-                                </div>
-                                <div class="col-2 mr-2 " id="btn-one">
-                                    <button type="button" class="btn btn-primary mb-2" >Next</button>
-                                    <!--                                <button type="button" class="btn btn-primary mb-2" id="next-btn">Next1</button>-->
-                                </div>
+                        <div class="form-row align-items-center">
+                            <div class="col-8">
+                                <label class="sr-only" ></label>
+                                <input type="hidden" name="question_id" >
+                                <input type="text" class="form-control mb-2 for-disable" id="my-input" placeholder="" autocomplete="off"  name="answer" >
                             </div>
-                        </fieldset>
+                            <div class="col-2 mr-2 " id="btn-one">
+                                <button type="button" class="btn btn-primary mb-2" >Next</button>
+                                <!--                                <button type="button" class="btn btn-primary mb-2" id="next-btn">Next1</button>-->
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -206,7 +218,19 @@ $_SESSION['answer']=$current_fruit[1];
         <!--        <button type="button" class="btn btn2 btn-outline-success col-12 mt-5" id="btn"><h1>Start</h1></button>-->
     </div>
 </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="pl-5 alert alert-success  col-12 col-sm-12 col-md-12 col-xl2">Your scores:
+                    <div class="result">
+                        <h2 class="text-right "><span id="my_timer" class=""></span></h2>
+                        <h2 class="time-error">voxtingiz tugadi</h2>
+                    </div>
+                </div>
+            </div>
 
+        </div>
+    </div>
 </body>
 
 </html>

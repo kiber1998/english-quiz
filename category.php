@@ -16,10 +16,10 @@ include "header.php";
         <div class="col-12 bg-light py-2 mb-3">
             <form action="" class="form-inline ">
                 <div class="mx-auto">
-                    <input type="text" class="form-control w-50 mr-3 ">
+                    <input type="text" class="form-control w-50 mr-3 " value="">
                     <button type="button" class="btn btn-info">Seach</button>
                 </div>
-                <button type="button" class="btn btn-info"><i class="fa fa-plus  text-white mr-2"></i>Add</button>
+                <a class="text-white" href="addcategory.php"><button type="button" class="btn btn-info"><i class="fa fa-plus  text-white mr-2"></i>Add</button></a>
             </form>
         </div>
 
@@ -35,5 +35,5 @@ include "header.php";
     </div>
 </div>
 
-</body>
-</html>
+
+
